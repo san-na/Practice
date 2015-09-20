@@ -40,6 +40,23 @@ class Browser(QWidget):
         self.favourites.setMinimumSize(200, 20)
         self.favourites.setMaximumSize(300, 20)
 
+        self.search_box = QLineEdit(self)
+        self.search_box.setMinimumSize = (200, 20)
+        self.search_box.setMaximumSize = (300, 20)
+
+        self.search_btn = QPushButton('Search', self)
+        self.search_btn.clicked.connect(self.search_btn_clicked)
+        self.search_btn.setMaximumSize(50, 20)
+
+        self.zoom_slider = QSlider(Qt.Orientation(1), self)
+        self.zoom_slider.setRange(2, 50)
+        self.zoom_slider.setValue(10)
+        self.zoom_slider.valueChanged.connect(self.zoom_changed)
+
+        self.zoom_label = QLabel('Zoom:')
+
+        self.webview.loadStarted.connect(self.page_loading)
+
         self.menu_bar = QHBoxLayout()
         self.menu_bar.addWidget(self.back_btn)
         self.menu_bar.addWidget(self.forward_btn)
@@ -47,6 +64,11 @@ class Browser(QWidget):
         self.menu_bar.addWidget(self.go_btn)
         self.menu_bar.addStretch()
         self.menu_bar.addWidget(self.favourites)
+        self.menu_bar.addStretch()
+        self.menu_bar.addWidget(self.search_box)
+        self.menu_bar.addWidget(self.search_btn)
+        self.menu_bar.addWidget(self.zoom_slider)
+        self.menu_bar.addWidget(self.zoom_label)
         self.main_layout = QVBoxLayout()
         self.main_layout.addLayout(self.menu_bar)
         self.main_layout.addWidget(self.webview)
@@ -57,6 +79,16 @@ class Browser(QWidget):
 
     def favourite_selected(self):
         self.webview.load(self.favourites.currentText())
+
+    def zoom_changed(self):
+        self.webview.setZoomFactor(self.zoom_slider.value()/10)
+
+    def search_btn_clicked(self):
+        self.webview.load('http://cn.bing.com/search?q='
+                    + self.search_box.text())
+
+    def page_loading(self):
+        self.url_entry.setText(self.webview.url().toString())
 
 
 class BrowserWindow(QMainWindow):

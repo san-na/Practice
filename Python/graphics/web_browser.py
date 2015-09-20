@@ -97,6 +97,24 @@ class BrowserWindow(QMainWindow):
         self.widget = Browser()
         self.setCentralWidget(self.widget)
 
+        self.exitAction = QAction(QIcon('exit.png'), '&Exit', self)
+        self.exitAction.setShortcut('Ctrl+Q')
+        self.exitAction.setStatusTip('Exit application')
+        self.exitAction.triggered.connect(self.close)
+
+        self.openFile = QAction(QIcon('open.png'), 'Open', self)
+        self.openFile.setShortcut('Ctrl+o')
+        self.openFile.setStatusTip('Open new File')
+        self.openFile.triggered.connect(self.showDialog)
+
+        self.menu = self.menuBar()
+        self.fileMenu  = self.menu.addMenu('&File')
+        self.fileMenu.addAction(self.openFile)
+        self.fileMenu.addAction(self.exitAction)
+
+    def showDialog(self):
+        fname, _ = QFileDialog.getOpenFileName(self, 'Open file', '/home')
+        self.widget.webview.load("file:///" + fname)
 
 app = QApplication(sys.argv)
 window = BrowserWindow()

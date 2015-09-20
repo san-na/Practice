@@ -24,14 +24,27 @@ class Browser(QWidget):
         self.forward_btn = QPushButton(">", self)
         self.forward_btn.clicked.connect(self.webview.forward)
         self.forward_btn.setMaximumSize(20, 20)
+        self.url_entry = QLineEdit(self)
+        self.url_entry.setMinimumSize(200, 20)
+        self.url_entry.setMaximumSize(300, 20)
+
+        self.go_btn = QPushButton('Go', self)
+        self.go_btn.clicked.connect(self.go_btn_clicked)
+        self.go_btn.setMaximumSize(20, 20)
 
         self.menu_bar = QHBoxLayout()
         self.menu_bar.addWidget(self.back_btn)
         self.menu_bar.addWidget(self.forward_btn)
+        self.menu_bar.addWidget(self.url_entry)
+        self.menu_bar.addWidget(self.go_btn)
+        self.menu_bar.addStretch()
         self.main_layout = QVBoxLayout()
         self.main_layout.addLayout(self.menu_bar)
         self.main_layout.addWidget(self.webview)
         self.setLayout(self.main_layout)
+
+    def go_btn_clicked(self):
+        self.webview.load(self.url_entry.text())
 
 
 class BrowserWindow(QMainWindow):

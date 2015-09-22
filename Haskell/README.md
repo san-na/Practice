@@ -47,7 +47,6 @@ False
 # 取 1024的后续(1025) 减去 100和125中的最大数 在加 233
 Prelude> (succ 1024) - (max 100 125) + 233
 1133
-
 ```
 
 ##### 4.函数操作
@@ -69,7 +68,6 @@ doubleSmallNumber x = if x > 100
 doubleSmallNumber' x = (if x > 100 then x else x*2) + 1
 
 conanO'Brien = "This is String test ', Haskell"
-
 ```
 
 ```
@@ -83,77 +81,4 @@ Prelude> :l haskell.hs
 Ok, modules loaded: Main.
 *Main> conanO'Brien
 "This is String test ', Haskell"
-
-```
-
-##### 5.列表操作
-
-```
-# 定义列表
-*Main> let list_ = [1,3,4,5,6]
-*Main> list_
-[1,3,4,5,6]
-
-# 列表拼接
-*Main> [1,2,3] ++ [33,44,66]
-[1,2,3,33,44,66]
-*Main> 'I' : " LOVE Haskell."
-"I LOVE Haskell."
-
-# 访问列表中的元素
-*Main> "Hello World." !! 4
-'o'
-
-# 判断一个元素是否在列表中
-Prelude> "hello" `elem` ["hello", "world"]
-True
-Prelude> "Haskell" `elem` ["hello", "world"]
-False
-
-# 比较列表(若第一位相同，则比较下一位)
-*Main> [3, 4, 5] > [3, 1, 6]
-True
-
-# 返回第一个元素(取反则是tail)
-Prelude> head [1, 3, 5, 7]
-1
-
-# 返回最后一个元素(取反则是init)
-Prelude> last [1, 3, 5, 7]
-7
-
-# 返回列表长度
-Prelude> length  [1, 3, 5, 7]
-4
-
-# 判断列表是否为空
-Prelude> null [1, 3, 5, 7]
-False
-Prelude> null []
-True
-
-# 反转列表
-Prelude> reverse  [1, 3, 5, 7]
-[7,5,3,1]
-
-# 返回指定长度的列表元素
-Prelude> take 2 [7,5,3,1]
-[7,5]
-
-# 删除指定长度的列表元素
-Prelude> drop 2 [7,5,3,1]
-[3,1]
-
-# 返回列表中最大元素(最小则是minimum)
-Prelude> maximum  [7,5,3,1]
-7
-Prelude> maximum ['h', 'u', 'a']
-'u'
-
-# 返回列表中所有元素之和(求所有元素之积则是product)--只适用于元素均为实数的列表
-Prelude> sum  [7,5,3,1]
-16
-Prelude> product [7,5,3,1]
-105
-
 ```

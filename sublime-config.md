@@ -7,8 +7,10 @@
 ```Python
 import  urllib.request,os;pf='Package Control.sublime-package';ipp=sublime.installed_packages_path();urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler()));open(os.path.join(ipp,pf),'wb').write(urllib.request.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read())
 ```
-
-####当看到代码最后一行提示的时候说明安装成功，此时重启st，可在Preferences -> Package Settings看到Package Control。
+```
+当看到代码最后一行提示的时候说明安装成功，此时重启st
+可在Preferences -> Package Settings看到Package Control。
+```
 
 ###3. 安装markdown preview
 
@@ -142,9 +144,6 @@ gcc -shared -o libsublime-imfix.so sublime_imfix.c  `pkg-config --libs --cflags 
 
 ###3. 中文输入
 
-
-####到这里默认已经装好了中文输入法 得到第3步中的库libsublime-imfix.so之后，先试试看是否能正常使用中文输入法
-
 ```
-LD_PRELOAD=./libsublime-imfix.so subl             #subl是安装好SublimeText 3后的程序启动命令
+LD_PRELOAD=./libsublime-imfix.so subl #subl是安装好SublimeText 3后的程序启动命令
 ```
